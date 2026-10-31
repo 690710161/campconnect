@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!-- CampConnect | index.html: ฝั่งโครงสร้างหน้าเว็บ (HTML) เท่านั้น สไตล์อยู่ใน css/ และตรรกะอยู่ใน js/ -->
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CampConnect | YWC21 Buddy Finder Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="wrap bar">
+  <div class="brand">
+    <div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
+    <div><b>Camp<span>Connect</span></b><small>YWC21 Buddy Finder Platform</small></div>
+  </div>
+  <nav class="camp" aria-label="ช่องทางของค่าย YWC21">
+    <span class="camp-t">ติดตามค่าย YWC21</span>
+    <a href="https://ywc21.ywc.in.th/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18"/></svg>เว็บไซต์</a>
+    <a href="https://www.facebook.com/ywcth" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M16 5a3.5 3.5 0 0 1 0 6.5M18 14.3c1.9.8 3 2.7 3 5.7"/></svg>Facebook</a>
+    <a href="https://www.instagram.com/ywcth" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6"/></svg>Instagram</a>
+    <button class="login-btn" id="openAuth" type="button"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>เข้าสู่ระบบ</button>
+  </nav>
+</header>
+
+<section class="wrap">
+  <div class="glass">
+    <span class="pill-badge">YWC21 Participants</span>
+    <h1>ค้นหา Buddy สาย <span class="c-d">Design</span> <span class="c-p">Programming</span> <span class="c-m">Marketing</span> &amp; <span class="c-c">Content</span></h1>
+    <p>ยินดีต้อนรับสู่อาณาจักรแลกเปลี่ยนความรู้และจับคู่เพื่อนร่วมค่าย Young Webmaster Camp #21</p>
+    <button class="cta" id="openQuiz"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V17h6v-.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"/></svg>ทำแบบทดสอบหา Buddy ที่ใช่ (Match Quiz)</button>
+    <div class="notice">โปรไฟล์อื่นนอกจากเจ้าของเว็บเป็นข้อมูลสมมติเพื่อสาธิต ไม่ใช่บุคคลจริง</div>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="tabbar"><nav class="tabs" id="tabs" aria-label="เลือกเมเจอร์"></nav></div>
+  <label class="search finder">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a95a8" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="search" type="search" placeholder="ค้นหาชื่อ, สกิล (Python, PR, ...)" aria-label="ค้นหา">
+  </label>
+  <div id="count" aria-live="polite"></div>
+  <div class="grid" id="grid"></div>
+</main>
+<footer>CampConnect เป็นโปรเจกต์ MVP ของผู้สมัคร YWC21 · ไม่ได้เป็นเว็บทางการของค่าย</footer>
+
+<dialog id="auth" aria-label="เข้าสู่ระบบหรือสร้างบัญชี">
+  <button class="x" id="closeAuth" type="button" aria-label="ปิด">&times;</button>
+  <p class="demo-note">หน้าตัวอย่าง (Demo): ยังไม่มีระบบสมาชิกจริง ข้อมูลที่กรอกจะไม่ถูกส่งหรือบันทึกที่ไหน กรุณาอย่าใช้อีเมลหรือรหัสผ่านจริง</p>
+  <p class="msg" id="authMsg" role="status" aria-live="polite"></p>
+
+  <section id="loginPane">
+    <h2>เข้าสู่ระบบ</h2>
+    <p class="sub">เข้าสู่ CampConnect เพื่อจัดการโปรไฟล์ของคุณ</p>
+    <form class="auth-form" id="loginForm" autocomplete="off">
+      <label>อีเมล<input type="email" required placeholder="you@example.com" autocomplete="off"></label>
+      <label>รหัสผ่าน
+        <span class="pw"><input id="lpw" type="password" required minlength="8" autocomplete="off"><button type="button" class="eye" data-eye="lpw">แสดง</button></span>
+      </label>
+      <div class="rowb"><label class="chk"><input type="checkbox"> จดจำฉันไว้</label><a href="#" id="forgot">ลืมรหัสผ่าน?</a></div>
+      <button class="cta wide">เข้าสู่ระบบ</button>
+    </form>
+    <p class="switch">ยังไม่มีบัญชีใช่ไหม? <a href="#" data-pane="signupPane">สร้างบัญชีของคุณได้เลย</a></p>
+  </section>
+
+  <section id="signupPane" hidden>
+    <h2>สร้างบัญชี</h2>
+    <div class="steps" aria-label="ขั้นตอนการสมัคร">
+      <span class="dot on" id="dot1"><b>1</b>ข้อมูลหลัก</span><span class="barl"></span><span class="dot" id="dot2"><b>2</b>เล่าเพิ่มเติม</span>
+    </div>
+    <form id="signupForm" novalidate autocomplete="off">
+      <div class="auth-form auth-grid" id="step1">
+        <p class="sub full">ใช้เวลาไม่ถึงนาที ช่องที่ไม่มี * ไม่บังคับ</p>
+        <label>ชื่อเล่นหรือนามแฝง *<input name="nick" required maxlength="30"></label>
+        <label>อีเมล *<input name="email" type="email" required autocomplete="off"></label>
+        <label>รหัสผ่าน *<span class="pw"><input id="spw" name="pw" type="password" required minlength="8" autocomplete="new-password"><button type="button" class="eye" data-eye="spw">แสดง</button></span></label>
+        <label>ยืนยันรหัสผ่าน *<span class="pw"><input id="spw2" name="pw2" type="password" required minlength="8" autocomplete="new-password"><button type="button" class="eye" data-eye="spw2">แสดง</button></span></label>
+        <label>ชั้นปี
+          <select name="year"><option value="">ไม่ระบุ</option><option>ปี 1</option><option>ปี 2</option><option>ปี 3</option><option>ปี 4 ขึ้นไป</option></select>
+        </label>
+        <label>สถานศึกษา<input name="school" placeholder="เช่น คณะ / มหาวิทยาลัย (ไม่ระบุได้)"></label>
+        <label>เมเจอร์แรกที่สมัครค่าย *
+          <select name="major" required><option value="">เลือกเมเจอร์</option><option>Design</option><option>Programming</option><option>Marketing</option><option>Content</option></select>
+        </label>
+        <label>เมเจอร์ที่สอง <span class="hint">(ไม่บังคับ)</span>
+          <select name="major2" id="minorSel"><option value="">ไม่มีเมเจอร์ที่สอง</option><option>Design</option><option>Programming</option><option>Marketing</option><option>Content</option></select>
+        </label>
+        <label class="full">ทักษะ<input name="skills" placeholder="คั่นด้วยจุลภาค เช่น HTML, Canva"></label>
+        <button type="button" class="cta wide full" id="nextStep">ถัดไป</button>
+      </div>
+      <div class="auth-form auth-grid" id="step2" hidden>
+        <p class="sub full">ส่วนนี้ไม่บังคับทั้งหมด จะกรอกแค่บางช่องหรือข้ามไปเลยก็ได้ ช่องที่ไม่กรอกจะถูกซ่อนจากการ์ดของคุณ</p>
+        <label class="full">ความสนใจ<input name="interests" placeholder="คั่นด้วยจุลภาค เช่น UX Writing, Data"></label>
+        <div class="full">
+          <span style="font-size:.88rem;font-weight:500">กำลังมองหาเพื่อนสายไหน <span class="hint">(เลือกได้หลายสาย)</span></span>
+          <div class="pickrow">
+            <label><input type="checkbox" name="looking" value="Design"> Design</label>
+            <label><input type="checkbox" name="looking" value="Programming"> Programming</label>
+            <label><input type="checkbox" name="looking" value="Marketing"> Marketing</label>
+            <label><input type="checkbox" name="looking" value="Content"> Content</label>
+          </div>
+          <span class="hint">ถ้าเลือกสายของตัวเอง = หาเพื่อนสายเดียวกัน ถ้าเลือกสายอื่น = หาเพื่อนต่างสาย</span>
+        </div>
+        <label class="full">แนะนำตัว
+          <textarea name="bio" rows="3" maxlength="200" placeholder="เล่าความชอบ ทักษะ เป้าหมายในอนาคต และเพื่อนที่อยากเจอ"></textarea>
+        </label>
+        <label>ช่องทางติดต่อ
+          <select name="ctype"><option>Instagram</option><option>LINE</option><option>Facebook</option><option>X</option><option>อีเมล</option><option>อื่นๆ</option></select>
+        </label>
+        <label>ชื่อบัญชีหรือข้อมูลติดต่อ<input name="chandle" placeholder="ไม่บังคับ"></label>
+        <span class="hint full" style="margin-top:-6px">แนะนำให้ใช้ชื่อบัญชีโซเชียลมากกว่าเบอร์โทร</span>
+        <label class="full">รูปโปรไฟล์
+          <input type="file" name="photo" accept="image/*"><span class="hint">ตัวอย่างเท่านั้น ยังไม่มีการอัปโหลดรูปจริง</span>
+        </label>
+        <label class="chk full"><input type="checkbox" name="consent" required> ฉันเข้าใจว่าข้อมูลโปรไฟล์ที่กรอกจะแสดงบนหน้าเว็บให้ทุกคนเห็น *</label>
+        <div class="btnrow full"><button type="button" class="cta ghost" id="backStep">ย้อนกลับ</button><button class="cta">สร้างบัญชี</button></div>
+      </div>
+    </form>
+    <p class="switch">มีบัญชีอยู่แล้ว? <a href="#" data-pane="loginPane">เข้าสู่ระบบ</a></p>
+  </section>
+</dialog>
+
+<dialog id="quiz">
+  <form method="dialog" id="quizForm">
+    <h2>Match Quiz</h2>
+    <fieldset><legend>1. อยากเจอเพื่อนสายไหน</legend>
+      <label><input type="radio" name="q1" value="all" checked> ทุกสาย</label>
+      <label><input type="radio" name="q1" value="Design"> Design</label>
+      <label><input type="radio" name="q1" value="Programming"> Programming</label>
+      <label><input type="radio" name="q1" value="Marketing"> Marketing</label>
+      <label><input type="radio" name="q1" value="Content"> Content</label>
+    </fieldset>
+    <fieldset><legend>2. อยากได้เพื่อนแบบไหน</legend>
+      <label><input type="radio" name="q2" value="all" checked> แบบไหนก็ได้</label>
+      <label><input type="radio" name="q2" value="same"> เพื่อนสายเดียวกัน ไว้แลกเปลี่ยนความรู้</label>
+      <label><input type="radio" name="q2" value="other"> เพื่อนต่างสาย ไว้ทำงานด้วยกัน</label>
+    </fieldset>
+    <div class="row"><button type="button" class="cta ghost" id="closeQuiz">ยกเลิก</button><button class="cta" style="margin-top:0">ดูผลลัพธ์</button></div>
+  </form>
+</dialog>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>
