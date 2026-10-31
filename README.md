@@ -4,8 +4,8 @@
 
 > โปรเจกต์ MVP ของผู้สมัคร YWC21 สาย Web Programming ไม่ได้เป็นเว็บทางการของค่าย
 
-- **Live Demo:** https://ชื่อบัญชีGitHub.github.io/campconnect/
-- **Source Code:** https://github.com/ชื่อบัญชีGitHub/campconnect
+- **Live Demo:** https://690710161.github.io/campconnect/
+- **Source Code:** https://github.com/690710161/campconnect
 
 ## ที่มาของไอเดีย
 
